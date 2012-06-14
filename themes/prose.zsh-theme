@@ -14,12 +14,8 @@ function box_name {
     [ -f ~/.box-name ] && cat ~/.box-name || hostname -s
 }
 
-function ruby_version {
-  ruby -v 2> /dev/null | awk '{ print $1 " " $2}'
-}
-
-function rvm_gemset {
-  rvm gemset name 2> /dev/null|awk '{if ($0=="" || index($0, "/")) print ""; else print "@" $0 }' 2> /dev/null 
+function rvm_current {
+  rvm current
 }
 
 PROMPT='
@@ -32,4 +28,5 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-RPROMPT='%{$fg_bold[red]%}$(ruby_version)$(rvm_gemset)%{$reset_color%}'
+#RPROMPT='%{$fg_bold[red]%}$(ruby_version)$(rvm_gemset)%{$reset_color%}'
+RPROMPT='%{$fg_bold[red]%}$(rvm_current)%{$reset_color%}'
